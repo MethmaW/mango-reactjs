@@ -8,6 +8,7 @@ import { useActions } from '../../redux/actions';
 import * as ThemeActions from '../../redux/actions/theme';
 import { RootState } from '../../redux/reducers';
 import { useStyles } from './styles';
+import logo from '../../assets/logo.png';
 
 const Header = () => {
 	const classes = useStyles();
@@ -20,7 +21,7 @@ const Header = () => {
 		<AppBar className={classes.appBar}>
 			<Toolbar>
 				<Typography variant='h6' color='inherit' noWrap={isMobile} className={classes.title}>
-					Mango Holidays
+					<img src={logo} />
 				</Typography>
 				<IconButton
 					color='inherit'

@@ -3,8 +3,11 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme: Theme) => ({
 	appBar: {
 		color: theme.palette.primary.contrastText,
-		zIndex: theme.zIndex.drawer + 1,
-		position: "absolute",
+
+		position: "static",
+
+		boxShadow: "none",
+		borderBottom: "1px #ECECEC solid"
 	},
 	navIconHide: {
 		[theme.breakpoints.up("md")]: {
