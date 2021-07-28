@@ -1,5 +1,6 @@
 import Signup from "../pages/SignUp";
 import HomePage from "../pages/HomePage"
+import Rooms from "../pages/Rooms"
 
 const publicPaths = [
 	{
@@ -13,6 +14,12 @@ const publicPaths = [
 		exact: true,
 		name: "HomePage",
 		component: HomePage,
+	},
+	{
+		path: "/available-rooms",
+		exact: true,
+		name: "HomePage",
+		component: Rooms,
 	}
 ];
 

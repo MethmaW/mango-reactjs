@@ -1,10 +1,10 @@
-import * as React from "react";
-import { useStyles } from "./styles";
+import React from 'react';
+import { useStyles } from './styles';
 
 const HomePage = () => {
 	const classes = useStyles();
 
-	return <div className={classes.root}>Home component</div>;
+	return <div className={classes.root}>welcome</div>;
 };
 
 export default HomePage;

@@ -1,41 +1,30 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import publicPaths from "./publicPaths";
-import privatePaths from "./privatePaths";
-import ProtectedRoute from "./ProtectedRoute";
-import NotFound from "../pages/NotFound";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import publicPaths from './publicPaths';
+import privatePaths from './privatePaths';
+import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../pages/NotFound';
+import { Header, Loader, DatePicker } from '../components';
 
 export function Routes() {
 	return (
-		<div>
+		<div className='appRouter'>
+			<Header />
+			<DatePicker />
 			<Switch>
 				{publicPaths.map((route, i) => {
 					return (
 						route.component && (
-							<Route
-								key={i}
-								path={route.path}
-								exact={route.exact}
-								name={route.name}
-								component={route.component}
-							/>
+							<Route key={i} path={route.path} exact={route.exact} name={route.name} component={route.component} />
 						)
 					);
 				})}
 
 				{privatePaths.map((route, i) => {
-					return (
-						<ProtectedRoute
-							key={i}
-							path={route.path}
-							exact={route.exact}
-							component={route.component}
-							isAuth={false}
-						/>
-					);
+					return <ProtectedRoute key={i} path={route.path} exact={route.exact} component={route.component} isAuth={false} />;
 				})}
 
-				<Route path="*" exact={true} component={NotFound} />
+				<Route path='*' exact={true} component={NotFound} />
 			</Switch>
 		</div>
 	);
