@@ -6,7 +6,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import { useHistory } from 'react-router-dom';
 import * as request from '../../utils/requests';
 
@@ -16,7 +15,6 @@ const Reserve = () => {
 	const checkout = useSelector((state: RootState) => state.dates.selectedEndDate);
 	const isAuth = useSelector((state: RootState) => state.auth.loggedIn);
 	const userData: any = useSelector((state: RootState) => state.auth.userData);
-	const roomData: any = useSelector((state: RootState) => state.rooms.data);
 	const history = useHistory();
 
 	const [ price, setPrice ] = useState<string>('');
@@ -69,11 +67,15 @@ const Reserve = () => {
 		};
 
 		const createBooking: any = await request.createBooking(bookingData);
+
+		if (createBooking) {
+			alert('booking created successfully');
+		}
 	};
 
 	return (
 		<div>
-			{state == undefined && <p>PLease select a date</p>}
+			{state === undefined && <p>PLease select a date</p>}
 
 			{state !== undefined && (
 				<div>

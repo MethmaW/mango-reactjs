@@ -5,7 +5,7 @@ import logo from '../../assets/logo.png';
 import { useLocation } from 'react-router-dom';
 
 const Header = () => {
-	const location: any | string = useLocation();
+	const location = useLocation();
 	const classes = useStyles();
 
 	if (location.pathname.match(/signup/) || location.pathname.match(/login/)) {
@@ -16,7 +16,7 @@ const Header = () => {
 		<AppBar className={classes.appBar}>
 			<Toolbar>
 				<Typography variant='h6' color='inherit' className={classes.title}>
-					<img src={logo} />
+					<img src={logo} alt='logo' />
 				</Typography>
 			</Toolbar>
 		</AppBar>

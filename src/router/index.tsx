@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, useLocation, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import publicPaths from './publicPaths';
 import privatePaths from './privatePaths';
 import ProtectedRoute from './ProtectedRoute';
 import NotFound from '../pages/NotFound';
-import { Header, Loader, DatePicker } from '../components';
-import Cookies from 'js-cookie';
+import { Header, DatePicker } from '../components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/reducers';
 import Signup from '../pages/SignUp';
 import Login from '../pages/LogIn';
 
 export function Routes() {
-	const location: any | string = useLocation();
-
 	const isAuth = useSelector((state: RootState) => state.auth.loggedIn);
-
-	const [ authCookie, setAuthCookie ] = useState<string | undefined>('');
 
 	return (
 		<div className='appRouter'>

@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const backendUrl = process.env.REACT_APP_BACKEND_LOCAL_URL
+
 const getRoomData = async (checkin: string, checkout: string) => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/rooms`,
+        url: `${backendUrl}/rooms`,
         method: "POST",
         data: {
             selectedCheckin: checkin,
@@ -16,7 +18,7 @@ const getRoomData = async (checkin: string, checkout: string) => {
 
 const createUser = async (firstName: string, lastName: string, email: string, password: string) => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/signup`,
+        url: `${backendUrl}/signup`,
         method: "POST",
         withCredentials: true,
         data: {
@@ -39,7 +41,7 @@ const createUser = async (firstName: string, lastName: string, email: string, pa
 
 const authUser = async (email: string, password: string) => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/login`,
+        url: `${backendUrl}/login`,
         method: "POST",
         withCredentials: true,
         data: {
@@ -60,7 +62,7 @@ const authUser = async (email: string, password: string) => {
 
 const getPaymentMethods = async () => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/payment-methods`,
+        url: `${backendUrl}/payment-methods`,
         method: "GET",
         withCredentials: true
     })
@@ -70,7 +72,7 @@ const getPaymentMethods = async () => {
 
 const createBooking = async (bookingData: any) => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/bookings/create-booking`,
+        url: `${backendUrl}/bookings/create-booking`,
         method: "POST",
         withCredentials: true,
         data: {
@@ -84,7 +86,7 @@ const createBooking = async (bookingData: any) => {
 
 const getMyBookings = async (userId: string) => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/bookings/${userId}`,
+        url: `${backendUrl}/bookings/${userId}`,
         method: "GET",
         withCredentials: true,
     })
@@ -94,7 +96,7 @@ const getMyBookings = async (userId: string) => {
 
 const cancelBooking = async (bookingId: string) => {
     return await axios({
-        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/bookings/cancel-booking`,
+        url: `${backendUrl}/bookings/cancel-booking`,
         method: "POST",
         withCredentials: true,
         data: {

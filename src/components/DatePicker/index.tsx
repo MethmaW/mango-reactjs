@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRangePicker } from 'react-date-range';
-import { addDays } from 'date-fns';
 import { useActions } from '../../redux/actions';
 import * as DateActions from '../../redux/actions/dates';
 import * as RoomActions from '../../redux/actions/rooms';
@@ -13,7 +12,7 @@ import { RootState } from '../../redux/reducers';
 import { useLocation } from 'react-router-dom';
 
 const DatePicker = () => {
-	const location: any | string = useLocation();
+	const location = useLocation();
 
 	const checkin = useSelector((state: RootState) => state.dates.selectedStartDate);
 	const checkout = useSelector((state: RootState) => state.dates.selectedEndDate);
