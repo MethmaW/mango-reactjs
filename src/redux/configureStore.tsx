@@ -4,6 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const logger = (createLogger as any)();
 const history = createBrowserHistory();
@@ -16,9 +18,17 @@ if (dev) {
 	middleware = composeWithDevTools(middleware);
 }
 
+const persistConfig = {
+	key: 'root',
+	storage
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer(history));
+
 export default () => {
-	const store = createStore(rootReducer(history), middleware) as any;
-	return { store };
+	const store = createStore(persistedReducer, middleware) as any;
+	let persistor = persistStore(store);
+	return { store, persistor };
 };
 
 export { history };

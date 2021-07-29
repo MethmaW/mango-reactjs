@@ -1,12 +1,12 @@
-import HomePage from "../pages/HomePage";
+import { Search } from "../components";
 
 const privatePaths = [
 	{
-		path: "/test",
+		path: "/search",
 		exact: true,
-		name: "Home",
-		component: HomePage,
-	},
+		name: "Search",
+		component: Search,
+	}
 ];
 
 export default privatePaths;

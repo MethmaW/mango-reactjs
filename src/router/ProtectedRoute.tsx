@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { Route, Redirect } from "react-router-dom";
+import React, { FC } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 interface Props {
 	isAuth: boolean;
@@ -8,12 +8,7 @@ interface Props {
 	exact: any;
 }
 
-const ProtectedRoute: FC<Props> = ({
-	isAuth,
-	component: Component,
-	path,
-	exact,
-}) => {
+const ProtectedRoute: FC<Props> = ({ isAuth, component: Component, path, exact }) => {
 	return (
 		<Route
 			path={path}
@@ -25,8 +20,8 @@ const ProtectedRoute: FC<Props> = ({
 					return (
 						<Redirect
 							to={{
-								pathname: "/signup",
-								state: { from: props.location },
+								pathname: '/signup',
+								state: { from: props.location }
 							}}
 						/>
 					);

@@ -1,8 +1,8 @@
-import { DateAction, DateActions } from "../model";
+import { DatesAction, DatesActions } from "../model";
 
-export function setCheckinDate(payload: any): DateAction {
+export function setCheckinDate(payload: any): DatesAction {
 	return {
-		type: DateActions.SET_CHEKIN_DATE,
+		type: DatesActions.SET_CHEKIN_DATE,
 		payload: payload
 	};
 }

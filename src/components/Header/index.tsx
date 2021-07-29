@@ -9,26 +9,27 @@ import * as ThemeActions from '../../redux/actions/theme';
 import { RootState } from '../../redux/reducers';
 import { useStyles } from './styles';
 import logo from '../../assets/logo.png';
+import { withRouter, useLocation } from 'react-router-dom';
 
 const Header = () => {
+	const location: any | string = useLocation();
+	console.log('fuj', location.pathname);
+
 	const classes = useStyles();
 	const isDarkTheme = useSelector((state: RootState) => state.theme.isDarkTheme);
 	const themeActions = useActions(ThemeActions);
 
-	const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+	if (location.pathname.match(/signup/) || location.pathname.match(/login/)) {
+		return null;
+	}
 
 	return (
 		<AppBar className={classes.appBar}>
 			<Toolbar>
-				<Typography variant='h6' color='inherit' noWrap={isMobile} className={classes.title}>
+				<Typography variant='h6' color='inherit' className={classes.title}>
 					<img src={logo} />
 				</Typography>
-				<IconButton
-					color='inherit'
-					aria-label='theme changer'
-					className={classes.themeChanger}
-					onClick={() => themeActions.toggleTheme()}
-				>
+				<IconButton color='inherit' aria-label='theme changer' onClick={() => themeActions.toggleTheme()}>
 					{!isDarkTheme ? <Brightness7 /> : <NightsStay />}
 				</IconButton>
 			</Toolbar>

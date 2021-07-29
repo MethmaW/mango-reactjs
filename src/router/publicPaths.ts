@@ -1,25 +1,25 @@
-import Signup from "../pages/SignUp";
-import HomePage from "../pages/HomePage"
+import Home from "../pages/Home"
 import Rooms from "../pages/Rooms"
+import Reserve from "../pages/Reserve";
 
 const publicPaths = [
 	{
-		path: "/signup",
-		exact: true,
-		name: "Signup",
-		component: Signup,
-	},
-	{
 		path: "/",
 		exact: true,
-		name: "HomePage",
-		component: HomePage,
+		name: "Home",
+		component: Home,
 	},
 	{
 		path: "/available-rooms",
 		exact: true,
-		name: "HomePage",
+		name: "Rooms",
 		component: Rooms,
+	},
+	{
+		path: "/reserve",
+		exact: true,
+		name: "Reserve",
+		component: Reserve,
 	}
 ];
 

@@ -17,8 +17,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	title: {
 		flexGrow: 1,
-	},
-	themeChanger: {
-		color: theme.palette.tertiary.main,
-	},
+	}
 }));

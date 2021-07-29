@@ -5,22 +5,47 @@ import { DateRangePicker } from 'react-date-range';
 import { addDays } from 'date-fns';
 import { useActions } from '../../redux/actions';
 import * as DateActions from '../../redux/actions/dates';
+import * as RoomActions from '../../redux/actions/rooms';
 import { Link } from 'react-router-dom';
+import * as request from '../../utils/requests';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
+import { useLocation } from 'react-router-dom';
 
 const DatePicker = () => {
-	const dateActions = useActions(DateActions);
+	const location: any | string = useLocation();
+	console.log('fuj', location.pathname);
 
+	const checkin = useSelector((state: RootState) => state.dates.selectedStartDate);
+	const checkout = useSelector((state: RootState) => state.dates.selectedEndDate);
+	const dateActions = useActions(DateActions);
+	const roomActions = useActions(RoomActions);
+
+	const startDate = checkin === '' ? new Date() : new Date(checkin);
+	const endDate = checkout === '' ? new Date() : new Date(checkout);
+
+	const [ availableRooms, setAvailableRooms ] = useState([]);
 	const [ selectedDates, setSelectedDates ] = useState([
 		{
-			startDate: new Date(),
-			endDate: addDays(new Date(), 1),
+			startDate: startDate,
+			endDate: endDate,
 			key: 'selection'
 		}
 	]);
 
+	if (location.pathname.match(/signup/) || location.pathname.match(/login/)) {
+		return null;
+	}
+
+	//TODO add 1 to checkin date if user has not selected checkout date
 	const userSelectedDates = {
 		checkin: selectedDates[0].startDate.toString(),
 		checkout: selectedDates[0].endDate.toString()
+	};
+
+	const getAvailableRooms = async () => {
+		const roomData = await request.getRoomData(userSelectedDates.checkin, userSelectedDates.checkout);
+		setAvailableRooms(roomData.data);
 	};
 
 	const handleSelect = (ranges: any) => {
@@ -30,7 +55,14 @@ const DatePicker = () => {
 
 	const searchRoomAvailability = () => {
 		dateActions.setCheckinDate(userSelectedDates);
+		getAvailableRooms();
 	};
+
+	console.log('availableRooms', availableRooms);
+
+	if (availableRooms.length !== 0) {
+		roomActions.setRooms(availableRooms);
+	}
 
 	return (
 		<React.Fragment>
