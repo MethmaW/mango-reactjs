@@ -9,8 +9,6 @@ const Rooms = () => {
 	const checkout = useSelector((state: RootState) => state.dates.selectedEndDate);
 	const rooms = useSelector((state: RootState) => state.rooms.data);
 
-	console.log('roomssssss', rooms);
-
 	return (
 		<div>
 			<p>checkin {checkin} </p>

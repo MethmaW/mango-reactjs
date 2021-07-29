@@ -14,7 +14,6 @@ import { useLocation } from 'react-router-dom';
 
 const DatePicker = () => {
 	const location: any | string = useLocation();
-	console.log('fuj', location.pathname);
 
 	const checkin = useSelector((state: RootState) => state.dates.selectedStartDate);
 	const checkout = useSelector((state: RootState) => state.dates.selectedEndDate);
@@ -49,7 +48,6 @@ const DatePicker = () => {
 	};
 
 	const handleSelect = (ranges: any) => {
-		console.log('ranges', ranges);
 		setSelectedDates([ ranges.selection ]);
 	};
 
@@ -57,8 +55,6 @@ const DatePicker = () => {
 		dateActions.setCheckinDate(userSelectedDates);
 		getAvailableRooms();
 	};
-
-	console.log('availableRooms', availableRooms);
 
 	if (availableRooms.length !== 0) {
 		roomActions.setRooms(availableRooms);

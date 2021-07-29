@@ -14,12 +14,15 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import * as request from '../../utils/requests';
+import * as AuthActions from '../../redux/actions/auth';
+import { useActions } from '../../redux/actions';
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>
 			{'Copyright © '}
-			<span>Mango Holidays</span> {new Date().getFullYear()}
+Mango Holidays {new Date().getFullYear()}
 			{'.'}
 		</Typography>
 	);
@@ -46,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+		const authActions = useActions(AuthActions);
+	const history = useHistory();
 	const classes = useStyles();
 
 	const [ firstName, setFirstName ] = useState('');
@@ -53,12 +58,22 @@ export default function SignUp() {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
-	console.log('details:', { firstName, lastName, email, password });
-
 	const submitSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const createUser = await request.createUser(firstName, lastName, email, password);
-		console.log('createUser', createUser);
+		const createUser: any = await request.createUser(firstName, lastName, email, password);
+
+		if (createUser?.status === 201) {
+			const userData = {
+				userData: createUser.data,
+				loggedIn: true
+			}
+
+			authActions.setAuth(userData);
+			history.push("/");
+
+		}
+
+		
 	};
 
 	//TODO confirm password field

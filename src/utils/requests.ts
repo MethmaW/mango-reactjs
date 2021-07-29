@@ -18,6 +18,7 @@ const createUser = async (firstName: string, lastName: string, email: string, pa
     return await axios({
         url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/signup`,
         method: "POST",
+        withCredentials: true,
         data: {
             firstName: firstName,
             lastName: lastName,
@@ -25,7 +26,14 @@ const createUser = async (firstName: string, lastName: string, email: string, pa
             password: password
         }
     })
-        .then((res) => res.data)
+        .then((res) => {
+            const response = {
+                data: res.data,
+                status: res.status
+            }
+
+            return response
+        })
         .catch((err) => console.log(err));
 };
 
@@ -50,4 +58,51 @@ const authUser = async (email: string, password: string) => {
         .catch((err) => console.log(err));
 };
 
-export { getRoomData, createUser, authUser };
+const getPaymentMethods = async () => {
+    return await axios({
+        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/payment-methods`,
+        method: "GET",
+        withCredentials: true
+    })
+        .then((res) => res)
+        .catch((err) => console.log(err));
+};
+
+const createBooking = async (bookingData: any) => {
+    return await axios({
+        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/bookings/create-booking`,
+        method: "POST",
+        withCredentials: true,
+        data: {
+            bookingData: bookingData
+        }
+    })
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
+};
+
+
+const getMyBookings = async (userId: string) => {
+    return await axios({
+        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/bookings/${userId}`,
+        method: "GET",
+        withCredentials: true,
+    })
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
+}
+
+const cancelBooking = async (bookingId: string) => {
+    return await axios({
+        url: `${process.env.REACT_APP_BACKEND_HOSTED_URL}/bookings/cancel-booking`,
+        method: "POST",
+        withCredentials: true,
+        data: {
+            bookingId: bookingId
+        }
+    })
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
+}
+
+export { getRoomData, createUser, authUser, getPaymentMethods, createBooking, getMyBookings, cancelBooking };

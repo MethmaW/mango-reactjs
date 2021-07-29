@@ -7,8 +7,6 @@ const initialState: Rooms = {
 
 export const rooms = createReducer<Rooms>(initialState, {
 	[RoomsActions.SET_ROOMS](state: Rooms, action: RoomsAction) {
-		console.log("actiongggg", action);
-
 		return {
 			...state,
 			data: action.payload,

@@ -13,7 +13,6 @@ import Login from '../pages/LogIn';
 
 export function Routes() {
 	const location: any | string = useLocation();
-	console.log('fuj', location.pathname);
 
 	const isAuth = useSelector((state: RootState) => state.auth.loggedIn);
 

@@ -18,20 +18,8 @@ const useStyles = makeStyles({
 const Room = (props: any) => {
 	const classes = useStyles();
 
-	const newTo = {
-		pathname: '/category/595212758daa6810cbba4104',
-		param1: 'Par1'
-	};
-	const backUrl = '/some/other/value';
 	return (
 		<Card className={classes.root}>
-			{/* <CardMedia
-					component='img'
-					alt='Contemplative Reptile'
-					height='140'
-					image='/static/images/cards/contemplative-reptile.jpg'
-					title='Contemplative Reptile'
-				/> */}
 			<CardContent>
 				<Typography gutterBottom variant='h5' component='h2'>
 					{props.data.propertyId.name}
@@ -39,10 +27,6 @@ const Room = (props: any) => {
 				<Typography gutterBottom variant='h5' component='h2'>
 					{props.data.occupancy}
 				</Typography>
-				{/* <Typography variant='body2' color='textSecondary' component='p'>
-						Lizards are a widespread group of squamate reptiles, with over 6, 000 species, ranging across all continents
-						except Antarctica
-					</Typography> */}
 
 				<Typography gutterBottom variant='h5' component='h2'>
 					{' '}

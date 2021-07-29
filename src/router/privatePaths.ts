@@ -1,11 +1,11 @@
-import { Search } from "../components";
+import MyBookings from "../pages/MyBookings"
 
 const privatePaths = [
 	{
-		path: "/search",
+		path: "/my-bookings",
 		exact: true,
-		name: "Search",
-		component: Search,
+		name: "MyBookings",
+		component: MyBookings,
 	}
 ];
 

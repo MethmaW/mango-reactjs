@@ -22,7 +22,6 @@ function Copyright() {
 		<Typography variant='body2' color='textSecondary' align='center'>
 			{'Copyright © '}
 			<Link color='inherit'>Mango Holidays</Link> {new Date().getFullYear()}
-			{'.'}
 		</Typography>
 	);
 }
@@ -47,8 +46,6 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-console.log('hfjfjhfjff', document.cookie);
-
 export default function SignIn() {
 	const authActions = useActions(AuthActions);
 	const history = useHistory();
@@ -61,8 +58,6 @@ export default function SignIn() {
 		e.preventDefault();
 		const authUser: any = await request.authUser(email, password);
 
-		console.log('authUserauthUser', authUser);
-
 		if (authUser?.status === 200) {
 			const userData = {
 				userData: authUser.data,
@@ -70,9 +65,11 @@ export default function SignIn() {
 			}
 
 			authActions.setAuth(userData);
+
+					history.push("/");
 		}
 
-		history.push("/");
+
 
 		
 	};
