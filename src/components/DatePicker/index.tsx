@@ -10,6 +10,7 @@ import * as request from '../../utils/requests';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import { useLocation } from 'react-router-dom';
+import addDays from 'date-fns/addDays';
 
 const DatePicker = () => {
 	const location = useLocation();
@@ -35,14 +36,16 @@ const DatePicker = () => {
 		return null;
 	}
 
-	//TODO add 1 to checkin date if user has not selected checkout date
 	const userSelectedDates = {
 		checkin: selectedDates[0].startDate.toString(),
-		checkout: selectedDates[0].endDate.toString()
+		checkout:
+			selectedDates[0].startDate === selectedDates[0].endDate
+				? addDays(selectedDates[0].endDate, 1).toString()
+				: selectedDates[0].endDate.toString()
 	};
 
 	const getAvailableRooms = async () => {
-		const roomData = await request.getRoomData(userSelectedDates.checkin, userSelectedDates.checkout);
+		const roomData: any = await request.getRoomData(userSelectedDates.checkin, userSelectedDates.checkout);
 		setAvailableRooms(roomData.data);
 	};
 

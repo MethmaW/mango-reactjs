@@ -71,6 +71,8 @@ const Reserve = () => {
 		if (createBooking) {
 			alert('booking created successfully');
 		}
+
+		history.push('/my-bookings');
 	};
 
 	return (
