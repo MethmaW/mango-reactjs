@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -19,7 +19,7 @@ function Copyright() {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>
 			{'Copyright © '}
-			<Link color='inherit'>Mango Holidays</Link> {new Date().getFullYear()}
+		Mango Holidays {new Date().getFullYear()}
 		</Typography>
 	);
 }
@@ -76,7 +76,7 @@ export default function SignIn() {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component='h1' variant='h5'>
-					Sign in
+					Log in
 				</Typography>
 				<form className={classes.form} onSubmit={submitLogin}>
 					<TextField
@@ -110,7 +110,7 @@ export default function SignIn() {
 					<Grid container>
 						<Grid item xs />
 						<Grid item>
-							<Link href='/signup' variant='body2'>
+							<Link to='/signup'>
 								{"Don't have an account? Sign Up"}
 							</Link>
 						</Grid>
