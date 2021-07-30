@@ -5,3 +5,7 @@ div.rdrDefinedRangesWrapper {
 .appRouter {
     width: 100%;
 }
+
+.MuiAppBar-colorPrimary {
+    background-color: white !important;
+}

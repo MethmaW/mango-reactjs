@@ -4,4 +4,7 @@ export const useStyles = makeStyles((theme) => ({
 	root: {
 
 	},
+	title: {
+		textAlign: "center"
+	},
 }));

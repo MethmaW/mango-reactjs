@@ -10,9 +10,6 @@ const Rooms = () => {
 
 	return (
 		<div>
-			<p>checkin {checkin} </p>
-			<p> checkout {checkout} </p>
-
 			{checkin === '' && <p>Please select a checkin date</p>}
 
 			{checkin !== '' &&

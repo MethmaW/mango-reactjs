@@ -3,6 +3,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import logo from '../../assets/logo.png';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	const location = useLocation();
@@ -16,8 +17,9 @@ const Header = () => {
 		<AppBar className={classes.appBar}>
 			<Toolbar>
 				<Typography variant='h6' color='inherit' className={classes.title}>
-					<img src={logo} alt='logo' />
+					<img src={logo} alt='logo' className={classes.logo} />
 				</Typography>
+				<Link to='/my-bookings'>My Bookings</Link>
 			</Toolbar>
 		</AppBar>
 	);

@@ -5,17 +5,19 @@ import * as request from '../../utils/requests';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useStyles } from './styles';
+import { Button } from '@material-ui/core';
 
 const HomePage = () => {
 	const userData: any = useSelector((state: RootState) => state.auth.userData);
 	const [ myBookings, setMyBookings ] = useState([]);
 	const [ open, setOpen ] = React.useState(false);
+	const classes = useStyles();
 
 	const getBookings = async () => {
 		const myBookings: any = await request.getMyBookings(userData.data._id);
@@ -34,7 +36,7 @@ const HomePage = () => {
 		setOpen(false);
 	};
 
-	//user can book one room at a time
+	//TODO user can book one room at a time
 
 	const cancelBooking = async (id: string) => {
 		const cancelBooking: any = await request.cancelBooking(id);
@@ -50,7 +52,7 @@ const HomePage = () => {
 			{myBookings.length !== 0 &&
 				myBookings.map((booking: any) => {
 					return (
-						<div>
+						<div className={classes.bookingCard}>
 							<Dialog
 								open={open}
 								onClose={handleClose}
@@ -77,25 +79,30 @@ const HomePage = () => {
 										{booking.roomId.propertyId.name} - {booking.roomId.occupancy}
 									</Typography>
 									<Typography gutterBottom variant='h5' component='h2'>
-										checkin: {booking.checkin.slice(0, 10)} checkout: {booking.checkout.slice(0, 10)}
+										checkin: {booking.checkin.slice(0, 10)}
+									</Typography>
+									<Typography gutterBottom variant='h5' component='h2'>
+										checkout: {booking.checkout.slice(0, 10)}
 									</Typography>
 
 									<Typography gutterBottom variant='h5' component='h2'>
-										${booking.price}
+										Price: ${booking.price}
 									</Typography>
 
 									<Typography gutterBottom variant='h5' component='h2'>
 										Payment method: {booking.paymentMethodId.name}
 									</Typography>
 
-									<button onClick={handleClickOpen}>Cancel booking</button>
+									<Button onClick={handleClickOpen} variant='contained' color='primary' className={classes.cancelBtn}>
+										Cancel booking
+									</Button>
 								</CardContent>
 							</Card>
 						</div>
 					);
 				})}
 
-			{myBookings.length === 0 && <p>You have no bookings available</p>}
+			{myBookings.length === 0 && <p className={classes.cusText}>You have no bookings available</p>}
 		</div>
 	);
 };
