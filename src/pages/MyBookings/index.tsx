@@ -27,7 +27,7 @@ const HomePage = () => {
 
 	useEffect(() => {
 		getBookings();
-	});
+	}, []);
 
 	const calculateCancellationFee = (bookedDate: any, price: any) => {
 		const bookedCheckin = Date.parse(bookedDate) + 46800000;
