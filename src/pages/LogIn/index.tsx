@@ -105,7 +105,7 @@ export default function SignIn() {
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 					/>
 					<Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-						Sign In
+						Log In
 					</Button>
 					<Grid container>
 						<Grid item xs />
