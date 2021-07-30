@@ -73,11 +73,6 @@ export default function SignUp() {
 		
 	};
 
-	//TODO confirm password field
-	//TODO first name last name capitalization
-	//TODO password validation
-	//TODO show notifications
-	//TODO empty the form once successful
 	return (
 		<Container component='main' maxWidth='xs'>
 			<CssBaseline />

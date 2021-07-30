@@ -8,8 +8,6 @@ const HomePage = () => {
 	const checkin = useSelector((state: RootState) => state.dates.selectedStartDate);
 	const history = useHistory();
 
-	//TODO make the checkin date to today when user goes to home route
-
 	const classes = useStyles();
 
 	if (checkin !== '') {

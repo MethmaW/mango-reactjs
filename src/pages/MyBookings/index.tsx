@@ -16,7 +16,8 @@ import { Button } from '@material-ui/core';
 const HomePage = () => {
 	const userData: any = useSelector((state: RootState) => state.auth.userData);
 	const [ myBookings, setMyBookings ] = useState([]);
-	const [ open, setOpen ] = React.useState(false);
+	const [ open, setOpen ] = useState(false);
+	const [ fee, setFee ] = useState(0);
 	const classes = useStyles();
 
 	const getBookings = async () => {
@@ -28,15 +29,30 @@ const HomePage = () => {
 		getBookings();
 	});
 
-	const handleClickOpen = () => {
+	const calculateCancellationFee = (bookedDate: any, price: any) => {
+		const bookedCheckin = Date.parse(bookedDate) + 46800000;
+		const currentTime = Date.parse(new Date().toString());
+		const hoursLeft = Math.floor((bookedCheckin - currentTime) / 1000 / 60 / 60);
+
+		if (hoursLeft > 24) {
+			setFee(0);
+		}
+		if (hoursLeft <= 24 && hoursLeft >= 12) {
+			setFee(price * 0.2);
+		}
+		if (hoursLeft < 12) {
+			setFee(price);
+		}
+	};
+
+	const handleClickOpen = (bookedDate: any, price: any) => {
+		calculateCancellationFee(bookedDate, price);
 		setOpen(true);
 	};
 
 	const handleClose = () => {
 		setOpen(false);
 	};
-
-	//TODO user can book one room at a time
 
 	const cancelBooking = async (id: string) => {
 		const cancelBooking: any = await request.cancelBooking(id);
@@ -47,12 +63,17 @@ const HomePage = () => {
 		}
 	};
 
+	const checkDate = () => {
+		const date = new Date();
+		return date;
+	};
+
 	return (
 		<div>
 			{myBookings.length !== 0 &&
 				myBookings.map((booking: any) => {
 					return (
-						<div className={classes.bookingCard}>
+						<div key={booking._id} className={classes.bookingCard}>
 							<Dialog
 								open={open}
 								onClose={handleClose}
@@ -61,7 +82,7 @@ const HomePage = () => {
 							>
 								<DialogTitle id='alert-dialog-title'>{'Are you sure you want to cancel the booking?'}</DialogTitle>
 								<DialogContent>
-									<DialogContentText id='alert-dialog-description'>Your cancellation fee will be: ${0}</DialogContentText>
+									<DialogContentText id='alert-dialog-description'>Your cancellation fee will be: ${fee}</DialogContentText>
 								</DialogContent>
 								<DialogActions>
 									<Button onClick={handleClose} color='primary'>
@@ -93,7 +114,12 @@ const HomePage = () => {
 										Payment method: {booking.paymentMethodId.name}
 									</Typography>
 
-									<Button onClick={handleClickOpen} variant='contained' color='primary' className={classes.cancelBtn}>
+									<Button
+										onClick={() => handleClickOpen(booking.checkin, booking.price)}
+										variant='contained'
+										color='primary'
+										className={classes.cancelBtn}
+									>
 										Cancel booking
 									</Button>
 								</CardContent>

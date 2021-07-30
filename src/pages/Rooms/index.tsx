@@ -6,7 +6,6 @@ import * as request from '../../utils/requests';
 
 const Rooms = () => {
 	const checkin = useSelector((state: RootState) => state.dates.selectedStartDate);
-	const checkout = useSelector((state: RootState) => state.dates.selectedEndDate);
 	const rooms = useSelector((state: RootState) => state.rooms.data);
 
 	const userData: any = useSelector((state: RootState) => state.auth.userData);
@@ -15,8 +14,6 @@ const Rooms = () => {
 
 	const checkUserHasBookings = async () => {
 		const myBookings: any = await request.getMyBookings(userData.data._id);
-
-		console.log('myBookingsmyBookings', myBookings);
 
 		if (myBookings.data?.length > 0) {
 			setShowReserveBtn(false);
